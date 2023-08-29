@@ -9,24 +9,20 @@ The PowerShell script offers a convenient solution for both updating the content
 An automated program has generated numerous output files. Consider the folder structure below as an example:
 
 ```
-C:\data\TSi:
-
-    - round_1:
-        - data_TSi0.2_round_1.dat
-        - data_TSi0.2_round_1.gnuplot
-        - data_TSi0.2_round_1.info
-
-    - round_2:
-        - data_TSi0.2_round_2.dat
-        - data_TSi0.2_round_2.gnuplot
-        - data_TSi0.2_round_2.info
-
-    - ...
-
-    - round_100:
-        - data_TSi0.2_round_100.dat
-        - data_TSi0.2_round_100.gnuplot
-        - data_TSi0.2_round_100.info
+C:\data\TSi:\
+├── round_1:\
+│   ├── data_TSi0.2_round_1.dat
+│   ├── data_TSi0.2_round_1.gnuplot
+│   └── data_TSi0.2_round_1.info
+├── round_2:\
+│   ├── data_TSi0.2_round_2.dat
+│   ├── data_TSi0.2_round_2.gnuplot
+│   └── data_TSi0.2_round_2.info
+├── ...
+└── round_n:\
+    ├── data_TSi0.2_round_n.dat
+    ├── data_TSi0.2_round_n.gnuplot
+    └── data_TSi0.2_round_n.info
 ```
 
 **Challenge:**
