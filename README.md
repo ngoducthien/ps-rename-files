@@ -1,6 +1,7 @@
 # File Renaming Script
 
-This PowerShell script lets you rename files in a folder and its subfolders based on a specified pattern. Simplify the process of bulk renaming with ease.
+The PowerShell script offers a convenient solution for both updating the content within files and renaming files in a folder and its subfolders, all based on a specified pattern. Simplify the process of managing and modifying your files in bulk.
+
 
 ## How to Use
 

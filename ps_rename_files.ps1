@@ -1,10 +1,10 @@
 # Define the source folder
 $sourceFolder = "C:\path\to\your\folder"
 
-# Define the pattern to search for in filenames
+# Define the pattern to search for in filenames and content
 $pattern = "_TSi0.2_"
 
-# Define the replacement pattern
+# Define the replacement pattern for filenames and content
 $replacement = "_TSi0.5_"
 
 # Print the source folder
@@ -13,25 +13,32 @@ Write-Host "The source folder: $sourceFolder"
 # Get all files in the source folder and its subfolders
 $files = Get-ChildItem -Path $sourceFolder -Recurse | Where-Object { !$_.PSIsContainer }
 
-# Count the files matching the pattern
-$filesMatchingPattern = $files | Where-Object { $_.Name -like "*$pattern*" }
-$matchingCountBefore = $filesMatchingPattern.Count
-Write-Host "Number of files matching '$pattern' before renaming: $matchingCountBefore"
-
-# Loop through each file and rename if necessary
+# Loop through each file and update content and rename if necessary
+$updatedCount = 0
 $renamedCount = 0
 foreach ($file in $files) {
-    if ($file.Name -like "*$pattern*") {
+    $fileContent = Get-Content -Path $file.FullName -Raw
+    if ($fileContent -match $pattern) {
+        # Update content
+        $newContent = $fileContent -replace [regex]::Escape($pattern), $replacement
+        $newContent | Set-Content -Path $file.FullName
+
+        # Rename file
         $newName = $file.Name -replace [regex]::Escape($pattern), $replacement
         Rename-Item -Path $file.FullName -NewName $newName
+
+        $updatedCount++
+        $renamedCount++
+    }
+    elseif ($file.Name -like "*$pattern*") {
+        # Rename file only
+        $newName = $file.Name -replace [regex]::Escape($pattern), $replacement
+        Rename-Item -Path $file.FullName -NewName $newName
+
         $renamedCount++
     }
 }
 
-# Count the files matching the pattern after renaming
-$filesMatchingPattern = $files | Where-Object { $_.Name -like "*$replacement*" }
-$matchingCountAfter = $filesMatchingPattern.Count
-Write-Host "Number of files matching '$replacement' after renaming: $matchingCountAfter"
-
-# Print the number of files renamed
-Write-Host "Number of files renamed: $renamedCount"
+# Print the number of files with content updated and renamed
+Write-Host "Number of files with content updated and renamed: $updatedCount"
+Write-Host "Number of files renamed only: $renamedCount"
