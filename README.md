@@ -29,7 +29,7 @@ C:\data\TSi:\
 
 However, due to a typographical error, the string **TSi0.5** was mistakenly written as **TSi0.2**. Consequently, it has become essential to rename all files within the directory, including subdirectories.
 
-Furthermore, the contents of these files still reference the incorrect filename. For instance, the file **data_TSi0.2_round_1.gnuplot** contains the line:
+Furthermore, the contents of these files still refer the incorrect filename. For instance, the file **data_TSi0.2_round_1.gnuplot** contains the line:
 
 ```gnuplot
 plot 'data_TSi0.2_round_1.dat' using 1:2 with lines
